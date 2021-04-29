@@ -10,7 +10,7 @@ export default{
   name:'update-post',
   before: 'inject-discourse-objects',
   initialize(){
-    withPluginApi('0.8.12', api => {
+    withPluginApi('0.8.31', api => {
 
       api.modifyClassStatic('model:user-field',{
         fieldTypes() {
@@ -32,7 +32,7 @@ export default{
 
         @on("init")
         initValues() {
-          if (this.field.field_type == "multiselect-dropdown" && this.value) {
+          if (this.field.field_type === "multiselect-dropdown" && this.value) {
             try {
               const parsedValue = JSON.parse(this.value);
               this.set("values", parsedValue);
@@ -47,6 +47,6 @@ export default{
           this.set("value", JSON.stringify(this.get("values")));
         },
       });
-  });
+    });
   }
 }
